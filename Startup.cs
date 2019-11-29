@@ -34,24 +34,24 @@ namespace Dutch_Treat
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentity<StoreUser, IdentityRole>(cfg =>
-            //{
-            //    cfg.User.RequireUniqueEmail = true;
-            //})
-            //    .AddEntityFrameworkStores<DutchContext>();
+            services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<DutchContext>();
 
-            //services.AddAuthentication()
-                //.AddCookie()
-                //.AddJwtBearer(cfg =>
-                //{
-                //    cfg.TokenValidationParameters = new TokenValidationParameters()
-                //    {
-                //        ValidIssuer = _config["Tokens:Issuer"],
-                //        ValidAudience = _config["Tokens:Audience"],
-                //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
-                //    };
+            services.AddAuthentication()
+            .AddCookie()
+            .AddJwtBearer(cfg =>
+            {
+                cfg.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = _config["Tokens:Issuer"],
+                    ValidAudience = _config["Tokens:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]))
+                };
 
-                // });
+            });
 
             services.AddDbContext<DutchContext>(cfg =>
             {
@@ -89,7 +89,7 @@ namespace Dutch_Treat
 
 
 
-           // app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(cfg =>
             {

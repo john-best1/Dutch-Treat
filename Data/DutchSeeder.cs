@@ -16,16 +16,16 @@ namespace Dutch_Treat.Data
     {
         private readonly DutchContext _ctx;
         private readonly IHostingEnvironment _hosting;
-        //private readonly UserManager<StoreUser> _userManager;
+        private readonly UserManager<StoreUser> _userManager;
 
-        public DutchSeeder(DutchContext ctx, IHostingEnvironment hosting/*, UserManager<StoreUser> userManager*/)
+        public DutchSeeder(DutchContext ctx, IHostingEnvironment hosting, UserManager<StoreUser> userManager)
         {
             _ctx = ctx;
             _hosting = hosting;
-            //_userManager = userManager;
+            _userManager = userManager;
         }
 
-        public void Seed()
+        public async Task SeedAsync()
         {
 
 
@@ -36,24 +36,24 @@ namespace Dutch_Treat.Data
 
 
             // Seed the Main User
-            //StoreUser user = await _userManager.FindByEmailAsync("shawn@dutchtreat.com");
-            //if (user == null)
-            //{
-            //    user = new StoreUser()
-            //    {
-            //        LastName = "Wildermuth",
-            //        FirstName = "Shawn",
-            //        Email = "shawn@dutchtreat.com",
-            //        UserName = "shawn@dutchtreat.com"
-            //    };
+            StoreUser user = await _userManager.FindByEmailAsync("shawn@dutchtreat.com");
+            if (user == null)
+            {
+                user = new StoreUser()
+                {
+                    LastName = "Wildermuth",
+                    FirstName = "Shawn",
+                    Email = "shawn@dutchtreat.com",
+                    UserName = "shawn@dutchtreat.com"
+                };
 
 
-            //    var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
-            //    if (result != IdentityResult.Success)
-            //    {
-            //        throw new InvalidOperationException("Could not create user in Seeding");
-            //    }
-            //}
+                var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Could not create user in Seeding");
+                }
+            }
 
             if (!_ctx.Products.Any())
             {

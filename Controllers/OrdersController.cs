@@ -9,10 +9,12 @@ using DutchTreat.Data.Entities;
 using Dutch_Treat.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DutchTreat.Controllers
 {
     [Route("api/[Controller]")]
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IDutchRepository _repository;

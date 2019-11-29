@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Dutch_Treat.Data
 {
-    public class DutchContext : DbContext
+    public class DutchContext : IdentityDbContext<StoreUser>
     {
 
         public DutchContext(DbContextOptions<DutchContext> options) : base(options)
